@@ -8,7 +8,7 @@ const postSchema = new mongoose.Schema({
     },
     likes: [{
         type: ObjectId,
-        ref: "User"
+        ref: "User" 
     }],
     dislikes: [{
         type: ObjectId,
