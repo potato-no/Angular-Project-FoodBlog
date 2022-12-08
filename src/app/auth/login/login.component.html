@@ -1,1 +1,36 @@
-<p>login works!</p>
+<div class="login-form">
+    <form #form="ngForm" (ngSubmit)="loginHandler(form)">
+        <h1>Login</h1>
+        <div class="content">
+            <div class="input-field">
+                <input type="email" name="email" #emailInput="ngModel" ngModel required placeholder="Email" autocomplete="nope">
+            </div>
+
+            <ng-container *ngIf="emailInput.touched">
+              <p class="error" *ngIf="emailInput.errors?.['required']">
+                Email is required!
+              </p> 
+              <p class="error" *ngIf="emailInput.errors?.['appEmailValidator']">
+                Email is not valid!
+              </p>
+            </ng-container>
+
+            <div class="input-field">
+                <input type="password" name="password" #passInput="ngModel" ngModel required placeholder="Password" autocomplete="new-password">
+            </div>
+
+            <ng-container *ngIf="passInput.touched">
+              <p class="error" *ngIf="passInput.errors?.['required']">
+                  Password is required!
+              </p>
+              <p class="error" *ngIf="passInput.errors?.['minlength']">
+                  Password must be at least 5 characters!
+              </p>
+            </ng-container>
+        </div>
+        <div class="action">
+            <button>Register</button>
+            <button [disabled]="form.invalid">Sign in</button>
+        </div>
+    </form>
+</div>

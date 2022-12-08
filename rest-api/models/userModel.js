@@ -33,9 +33,6 @@ const userSchema = new mongoose.Schema({
             message: props => `${props.value} must contains only latin letters and digits!`
         },
     },
-    role: {
-        type: String,
-    },
     recipes: [{
         type: ObjectId,
         ref: "Recipe"

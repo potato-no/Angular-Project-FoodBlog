@@ -1,15 +1,75 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { appEmailDomain } from 'src/app/core/constants';
+import { appEmailValidator } from 'src/app/core/validators';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
 
-  constructor() { }
+  showEditMode = false;
+  formSubmitted = false;
 
-  ngOnInit(): void {
+  counter = 1;
+
+  get user() {
+    const { username, email } = this.authService.user!;
+    return {
+      username,
+      email,
+    };
   }
 
+  get addressesArray() {
+    return (this.form.get('addresses') as FormArray);
+  }
+
+  form!: FormGroup;
+
+  constructor(private fb: FormBuilder, private authService: AuthService) {
+    this.createForm({ ...this.user, addresses: [{ postCode: 'Hello', street: 'World' }] });
+  }
+
+  createForm(formValue: any) {
+    this.form = this.fb.group({
+      username: [formValue.username, [Validators.required, Validators.minLength(5)]],
+      email: [formValue.email, [Validators.required, appEmailValidator(appEmailDomain)]],
+      ext: [formValue.ext],
+      tel: [formValue.tel],
+      addresses: this.fb.array(
+        new Array(this.counter).fill(null).map((_, i) => {
+          return this.fb.group({
+            postCode: formValue.addresses[i]?.postCode || '',
+            street: formValue.addresses[i]?.street || ''
+          })
+        })
+      )
+    })
+
+  }
+
+  addNewAddress(): void {
+    this.counter++;
+    this.createForm(this.form.value);
+  }
+
+  toggleEditMode(): void {
+    this.showEditMode = !this.showEditMode;
+    if (this.showEditMode) {
+      this.formSubmitted = false;
+    }
+  }
+
+  saveProfile(): void {
+    this.formSubmitted = true;
+    if (this.form.invalid) { return; }
+    const { username, email } = this.form.value;
+    this.authService.setProfile(username, email).subscribe(() => {
+      this.toggleEditMode();
+    });
+  }
 }

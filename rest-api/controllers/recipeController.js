@@ -23,10 +23,10 @@ function getRecipe(req, res, next) {
 }
 
 function createRecipe(req, res, next) {
-    const { recipeName, description, ingredients } = req.body;
+    const { recipeName, description, ingredients, imgUrl } = req.body;
     const { _id: userId } = req.user;
 
-    recipeModel.create({ recipeName, description, ingredients, userId, saves: [], posts: [] })
+    recipeModel.create({ recipeName, description, ingredients, imgUrl, userId, saves: [], posts: [] })
         .then(recipe => {
             newPost(postText, userId, recipe._id)
                 .then(([_, updatedRecipe]) => res.status(200).json(updatedRecipe))

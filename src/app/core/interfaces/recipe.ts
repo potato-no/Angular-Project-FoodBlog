@@ -4,6 +4,7 @@ export interface IRecipe {
     recipeName: string;
     description: string;
     ingredients: string;
+    imgUrl: string;
     saves: string[];
     posts: string[];
     created_at: string;

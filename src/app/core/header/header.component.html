@@ -1,1 +1,25 @@
-<p>header works!</p>
+<header>
+  <nav>
+    <ng-template #loggedOutTemplate>
+      <ul>
+        <li><a routerLink="/auth/login">Login</a></li>
+        <li><a routerLink="/auth/register">Register</a></li>
+      </ul>
+    </ng-template>
+  
+    <ng-template #loggedInTemplate>
+      <ul>
+        <li><a routerLink="/auth/profile">{{user?.username}}'s profile</a></li>
+        <li><a routerLink="/auth/logout">Logout</a></li>
+      </ul>
+    </ng-template>
+  
+    <ng-container *ngTemplateOutlet="isLoggedIn ? loggedInTemplate : loggedOutTemplate"></ng-container>
+
+    <ul>
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/recipe/recent">Recipes</a></li>
+      <li><a routerLink="/recipe/new">Post Recipe</a></li>
+    </ul>
+  </nav>
+</header>
