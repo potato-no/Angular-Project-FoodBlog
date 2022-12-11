@@ -1,0 +1,59 @@
+<div class="createNew-form">
+    <form #form="ngForm" (ngSubmit)="newRecipeHandler(form)">
+        <h1>Create new Recipe</h1>
+        <div class="content">
+            <div class="input-field">
+                <input type="text" #nameInput="ngModel" ngModel required minlength="5" name="recipeName" placeholder="Recipe title" autocomplete="nope">
+            </div>
+
+            <ng-container *ngIf="nameInput.touched">
+                <p class="error" *ngIf="nameInput.errors?.['required']">
+                    Recipe title is required!
+                </p>
+                <p class="error" *ngIf="nameInput.errors?.['minlength']">
+                    Recipe title must be at least 5 characters long!
+                </p>
+            </ng-container>
+
+            <div class="input-field">
+                <input type="imgUrl" #imageUrlInput="ngModel" ngModel required placeholder="Image URL" name="imgUrl" autocomplete="nope">
+            </div>
+
+            <ng-container *ngIf="imageUrlInput.touched">
+                <p class="error" *ngIf="imageUrlInput.errors?.['required']">
+                    Image URL is required!
+                </p>
+            </ng-container>
+
+            <div class="input-field">
+                <textarea type="text" #ingredientsInput="ngModel" ngModel required minlength="10" placeholder="Ingredients" name="ingredients" autocomplete="nope"></textarea>
+            </div>
+
+            <ng-container *ngIf="ingredientsInput.touched">
+                <p class="error" *ngIf="ingredientsInput.errors?.['required']">
+                    Ingredients are required!
+                </p>
+                <p class="error" *ngIf="ingredientsInput.errors?.['minlength']">
+                    Ingredients must be at least 10 characters long!
+                </p>
+            </ng-container>
+
+            <div class="input-field">
+                <textarea type="text" #descriptionInput="ngModel" ngModel required minlength="20" placeholder="Description" name="description" autocomplete="nope"></textarea>
+            </div>
+
+            <ng-container *ngIf="descriptionInput.touched">
+                <p class="error" *ngIf="descriptionInput.errors?.['required']">
+                    Description is required!
+                </p>
+                <p class="error" *ngIf="descriptionInput.errors?.['minlength']">
+                    Description must be at least 20 characters long!
+                </p>
+            </ng-container>
+        </div>
+        <div class="action">
+            <button routerLink="/recipe/recent">Cancel</button>
+            <button [disabled]="form.invalid">Create</button>
+        </div>
+    </form>
+</div>
