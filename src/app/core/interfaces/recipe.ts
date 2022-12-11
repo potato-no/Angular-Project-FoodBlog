@@ -1,5 +1,5 @@
 import { IUser } from "./user";
-
+ 
 export interface IRecipe {
     recipeName: string;
     description: string;

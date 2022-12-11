@@ -1,32 +1,38 @@
-<!-- <div class="profile">
-    <form [formGroup]="form" (ngSubmit)="saveProfile()">
-      <img src="/assets/profile.png" alt="default user">
-  
-      <h3>User Info:</h3>
+<div class="profile-form">
+  <form [formGroup]="form" (ngSubmit)="saveProfile()">
+    <h1>Profile info:</h1>
+
+    <div class="content">
+
       <div class="flex">
-        <p>Username:</p>
-        <p>
+        <p>Username:</p><p>
           <ng-container *ngIf="showEditMode">
-            <input type="text" formControlName="username">
+            <div class="input-field">
+              <input type="text" formControlName="username" placeholder="Username" autocomplete="nope">
+            </div>
             <ng-container *ngIf="form.get('username')?.touched || formSubmitted">
               <p *ngIf="form.get('username')?.errors?.['required']" class="error">
                 Username is required!
               </p>
               <p *ngIf="form.get('username')?.errors?.['minlength']" class="error">
-                Username should be longer than 5 chars
+                Username should be longer than 5 characters!
               </p>
             </ng-container>
           </ng-container>
+
           <ng-container *ngIf="!showEditMode">
             {{user.username}}
           </ng-container>
         </p>
       </div>
+
       <div class="flex">
         <p>Email: </p>
         <p>
           <ng-container *ngIf="showEditMode">
-            <input type="text" formControlName="email">
+            <div class="input-field">
+              <input type="email" formControlName="email" placeholder="Email" autocomplete="nope">
+            </div>
             <ng-container *ngIf="form.get('email')?.touched || formSubmitted">
               <p class="error" *ngIf="form.get('email')?.errors?.['required']">
                 Email is required!
@@ -36,40 +42,34 @@
               </p>
             </ng-container>
           </ng-container>
+
           <ng-container *ngIf="!showEditMode">
             {{user.email}}
           </ng-container>
         </p>
-      </div>
-      <div class="flex">
-        <p>Phone: </p>
-        <p>
-          <ng-container *ngIf="showEditMode">
-            <label for="tel"><span><i class="fas fa-phone"></i></span></label>
-            <select name="select-tel" id="select-tel" class="tel" formControlName="ext">
-              <option value="00359">+359</option>
-              <option value="00358">+358</option>
-            </select>
-            <input type="text" formControlName="tel" id="tel" placeholder="885 888 888">
-          </ng-container>
-        </p>
-      </div> -->
-  
-      <!-- <div *ngFor="let address of addressesArray.controls; let i = index" formArrayName="addresses">
-        <ng-container [formGroup]="$any(address)">
-          <input type="text" formControlName="postCode">
-          <input type="text" formControlName="street">
-        </ng-container>
-        
-        <button (click)="addNewAddress()">+</button>
-      </div> -->
-  
-      <!-- <ng-template #edit>
+      </div> 
+
+    </div>
+
+    <div class="action">
+      <button>Back</button>
+
+      <ng-template #edit>
         <button class="edit-button" type="submit">Save</button>
       </ng-template>
+      
       <ng-template #nonEdit>
-        <button class="edit-button" type="button" (click)="toggleEditMode()">Edit</button>
+        <button  type="button" (click)="toggleEditMode()">Edit</button>
       </ng-template>
+
       <ng-container *ngTemplateOutlet="showEditMode ? edit : nonEdit"></ng-container>
-    </form>
-  </div> -->
+    </div>
+  </form>
+</div>
+
+
+
+
+
+
+  

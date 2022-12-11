@@ -24,37 +24,22 @@ export class ProfileComponent {
     };
   }
 
-  get addressesArray() {
-    return (this.form.get('addresses') as FormArray);
-  }
+  // get addressesArray() {
+  //   return (this.form.get('addresses') as FormArray);
+  // }
 
   form!: FormGroup;
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
-    this.createForm({ ...this.user, addresses: [{ postCode: 'Hello', street: 'World' }] });
+    this.createForm({ ...this.user });
   }
 
   createForm(formValue: any) {
     this.form = this.fb.group({
       username: [formValue.username, [Validators.required, Validators.minLength(5)]],
       email: [formValue.email, [Validators.required, appEmailValidator(appEmailDomain)]],
-      ext: [formValue.ext],
-      tel: [formValue.tel],
-      addresses: this.fb.array(
-        new Array(this.counter).fill(null).map((_, i) => {
-          return this.fb.group({
-            postCode: formValue.addresses[i]?.postCode || '',
-            street: formValue.addresses[i]?.street || ''
-          })
-        })
-      )
     })
 
-  }
-
-  addNewAddress(): void {
-    this.counter++;
-    this.createForm(this.form.value);
   }
 
   toggleEditMode(): void {

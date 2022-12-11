@@ -3,7 +3,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { appEmailDomain } from 'src/app/core/constants';
 import { appEmailValidator, sameValueGroupValidator } from 'src/app/core/validators';
-// import { catchError, map, of, throwError } from 'rxjs';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -31,7 +30,7 @@ export class RegisterComponent {
     const { username, email, pass: { password, rePass } = {} } = this.form.value;
     this.authService.register(username!, email!, password!, rePass!)
       .subscribe(user => {
-        this.router.navigate(['/recipe/recent']);
+        this.router.navigate(['/recipe/recent']); 
       });
   }
 }

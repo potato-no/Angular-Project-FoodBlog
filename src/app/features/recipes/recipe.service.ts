@@ -22,12 +22,12 @@ export class RecipeService {
   }
 
 //TODO fix this
-  createRecipe(name: string, text: string) {
-    return this.http.post<IRecipe>('/api/recipes/', { recipeName: name, postText: text });
+  createRecipe(recipeName: string, imgUrl: string, ingredients: string, description: string) {
+    return this.http.post<IRecipe>('/api/recipes/', { recipeName: recipeName, imgUrl: imgUrl, ingredients: ingredients, description: description });
   }
 
-  updateRecipe(id: string, name: string, text: string) {
-    return this.http.put<IRecipe>('/api/recipes/' + id, { recipeName: name, postText: text });
+  updateRecipe(id: string, recipeName: string, imgUrl: string, ingredients: string, description: string) {
+    return this.http.put<IRecipe>('/api/recipes/' + id, { recipeName: recipeName, imgUrl: imgUrl, ingredients: ingredients, description: description });
   }
 
   deleteRecipePost(recipeId: string, postId: string) {

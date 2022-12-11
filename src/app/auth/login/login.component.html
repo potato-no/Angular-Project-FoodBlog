@@ -1,5 +1,5 @@
 <div class="login-form">
-    <form #form="ngForm" (ngSubmit)="loginHandler(form)">
+    <form #form="ngForm" (ngSubmit)="loginHandler(form)"> 
         <h1>Login</h1>
         <div class="content">
             <div class="input-field">
@@ -29,7 +29,7 @@
             </ng-container>
         </div>
         <div class="action">
-            <button>Register</button>
+            <button routerLink="auth/register">Register</button>
             <button [disabled]="form.invalid">Sign in</button>
         </div>
     </form>
