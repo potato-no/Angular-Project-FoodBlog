@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true,
         minlength: [5, 'Username should be at least 5 characters!'],
+        maxlength: [15, 'Username should be less than 15 characters!'],
         validate: {
             validator: function (v) {
                 return /[a-zA-Z0-9]+/g.test(v);
@@ -37,11 +38,7 @@ const userSchema = new mongoose.Schema({
         type: ObjectId,
         ref: "Recipe"
     }],
-    posts: [{
-        type: ObjectId,
-        ref: "Post"
-    }]
-}, { timestamps: { createdAt: 'created_at' } });
+});
 
 userSchema.methods = {
     matchPassword: function (password) {

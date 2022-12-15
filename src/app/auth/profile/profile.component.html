@@ -8,7 +8,7 @@
         <p>Username:</p><p>
           <ng-container *ngIf="showEditMode">
             <div class="input-field">
-              <input type="text" formControlName="username" placeholder="Username" autocomplete="nope">
+              <input type="text" formControlName="username" minlength="5" maxlength="15" placeholder="Username" autocomplete="nope">
             </div>
             <ng-container *ngIf="form.get('username')?.touched || formSubmitted">
               <p *ngIf="form.get('username')?.errors?.['required']" class="error">
@@ -16,6 +16,9 @@
               </p>
               <p *ngIf="form.get('username')?.errors?.['minlength']" class="error">
                 Username should be longer than 5 characters!
+              </p>
+              <p *ngIf="form.get('username')?.errors?.['maxlength']" class="error">
+                Username should be less than 15 characters!
               </p>
             </ng-container>
           </ng-container>
@@ -48,18 +51,18 @@
           </ng-container>
         </p>
       </div> 
-
     </div>
 
     <div class="action">
-      <button>Back</button>
-
+      
       <ng-template #edit>
+        <button>Back</button>
         <button class="edit-button" type="submit">Save</button>
       </ng-template>
       
       <ng-template #nonEdit>
-        <button  type="button" (click)="toggleEditMode()">Edit</button>
+        <button routerLink="/recipe/recent">Back</button>
+        <button type="button" (click)="toggleEditMode()">Edit</button>
       </ng-template>
 
       <ng-container *ngTemplateOutlet="showEditMode ? edit : nonEdit"></ng-container>

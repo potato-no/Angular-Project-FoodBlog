@@ -1,1 +1,117 @@
-<p>recipe-details works!</p>
+<div class="details-page" *ngIf="!!recipe">
+    <form [formGroup]="form" (ngSubmit)="updateRecipe()">
+        <div class="details-left">
+            <img class="recipe-img" src="{{recipe.imgUrl}}">
+        </div>
+        <div class="details-right">
+            <ng-container *ngIf="showEditMode">
+                <div class="input-field">
+                    <label for="recipe title">Recipe title: </label>
+                    <input type="text" formControlName="recipeName" minlength="5" maxlength="30" placeholder="Recipe title" autocomplete="nope">
+                </div>
+
+                <ng-container *ngIf="form.get('recipeName')?.touched || formSubmitted">
+                    <p class="error" *ngIf="form.get('recipeName')?.errors?.['required']">
+                        Recipe title is required!
+                    </p>
+                    <p class="error" *ngIf="form.get('recipeName')?.errors?.['minlength']">
+                        Recipe title must be at least 5 characters long!
+                    </p>
+                    <p class="error" *ngIf="form.get('recipeName')?.errors?.['maxlength']">
+                        Recipe title must be less than 30 characters long!
+                    </p>
+                </ng-container>
+            </ng-container>
+            <ng-container *ngIf="!showEditMode">
+                <h2 class="recipe-title">{{recipe.recipeName}} <span>Created by: {{recipe.userId.username}}</span></h2>
+            </ng-container>
+
+            <ng-container *ngIf="showEditMode">
+                <div class="input-field">
+                    <label for="imgUrl">Image URL: </label>
+                    <input type="imgUrl" placeholder="Image URL" formControlName="imgUrl" autocomplete="nope">
+                </div>
+
+                <ng-container *ngIf="form.get('imgUrl')?.touched || formSubmitted">
+                    <p class="error" *ngIf="form.get('imgUrl')?.errors?.['required']">
+                        Image URL is required!
+                    </p>
+                </ng-container>
+            </ng-container>
+
+            <ng-container *ngIf="showEditMode">
+                <div class="input-field">
+                    <label for="ingredients">Ingredients: </label>
+                    <textarea type="text" placeholder="Ingredients" formControlName="ingredients" minlength="10" maxlength="100" autocomplete="nope"></textarea>
+                </div>
+
+                <ng-container *ngIf="form.get('ingredients')?.touched || formSubmitted">
+                    <p class="error" *ngIf="form.get('ingredients')?.errors?.['required']">
+                        Ingredients are required!
+                    </p>
+                    <p class="error" *ngIf="form.get('ingredients')?.errors?.['minlength']">
+                        Ingredients must be at least 10 characters long!
+                    </p>
+                    <p class="error" *ngIf="form.get('ingredients')?.errors?.['maxlength']">
+                        Ingredients must be less than 100 characters long!
+                    </p>
+                </ng-container>
+            </ng-container>
+            <ng-container *ngIf="!showEditMode">
+                <p class="recipe-ingredients">Ingredients needed: <span>{{recipe.ingredients}}</span></p>
+            </ng-container>
+
+            <ng-container *ngIf="showEditMode">
+                <div class="input-field">
+                    <label for="description">Description: </label>
+                    <textarea type="text" placeholder="Description" formControlName="description" minlength="20" maxlength="200" autocomplete="nope"></textarea>
+                </div>
+
+                <ng-container *ngIf="form.get('description')?.touched || formSubmitted">
+                    <p class="error" *ngIf="form.get('description')?.errors?.['required']">
+                        Description is required!
+                    </p>
+                    <p class="error" *ngIf="form.get('description')?.errors?.['minlength']">
+                        Description must be at least 20 characters long!
+                    </p>
+                    <p class="error" *ngIf="form.get('description')?.errors?.['maxlength']">
+                        Description must be less than 200 characters long!
+                    </p>
+                </ng-container>
+            </ng-container>
+            <ng-container *ngIf="!showEditMode">
+                <p class="recipe-description">How to prepare: <span>{{recipe.description}}</span></p>
+            </ng-container>
+
+            <div class="buttons">
+                <ng-container *ngIf="!isOwner">
+                    <ng-container *ngIf="hasSaved">
+                        <p class="saved">Recipe saved!</p>
+                    </ng-container>
+                    <ng-container *ngIf="!hasSaved">
+                        <button type="button" (click)="save()" class="btn-save">Save</button>
+                    </ng-container>
+
+                    <ng-container *ngIf="hasLiked">
+                        <p class="liked">Recipe liked!</p>
+                    </ng-container>
+                    <ng-container *ngIf="!hasLiked">
+                        <button type="button" (click)="like()" class="btn-like">Like</button>
+                    </ng-container>
+                </ng-container>
+
+                <ng-container *ngIf="isOwner">
+                    <ng-container *ngIf="showEditMode">
+                        <button>Back</button>
+                        <button class="btn-save" type="submit">Save</button>
+                    </ng-container>
+
+                    <ng-container *ngIf="!showEditMode">
+                        <button type="button" (click)="toggleEditMode()" class="btn-edit">Edit</button>
+                        <button type="button" (click)="delete()" class="btn-delete">Delete</button>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+    </form>
+</div>

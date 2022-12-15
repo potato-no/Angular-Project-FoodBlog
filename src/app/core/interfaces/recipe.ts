@@ -6,8 +6,8 @@ export interface IRecipe {
     ingredients: string;
     imgUrl: string;
     saves: string[];
-    posts: string[];
-    created_at: string;
-    updated_at: string;
+    likes: string[];
     userId: IUser;
+    _id: string;
+    __v: number;
 }

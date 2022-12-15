@@ -3,7 +3,7 @@
         <h1>Create new Recipe</h1>
         <div class="content">
             <div class="input-field">
-                <input type="text" #nameInput="ngModel" ngModel required minlength="5" name="recipeName" placeholder="Recipe title" autocomplete="nope">
+                <input type="text" #nameInput="ngModel" ngModel required minlength="5" maxlength="30" name="recipeName" placeholder="Recipe title" autocomplete="nope">
             </div>
 
             <ng-container *ngIf="nameInput.touched">
@@ -12,6 +12,9 @@
                 </p>
                 <p class="error" *ngIf="nameInput.errors?.['minlength']">
                     Recipe title must be at least 5 characters long!
+                </p>
+                <p class="error" *ngIf="nameInput.errors?.['maxlength']">
+                    Recipe title must be less than 30 characters long!
                 </p>
             </ng-container>
 
@@ -26,7 +29,7 @@
             </ng-container>
 
             <div class="input-field">
-                <textarea type="text" #ingredientsInput="ngModel" ngModel required minlength="10" placeholder="Ingredients" name="ingredients" autocomplete="nope"></textarea>
+                <textarea type="text" #ingredientsInput="ngModel" ngModel required minlength="10" maxlength="100" placeholder="Ingredients" name="ingredients" autocomplete="nope"></textarea>
             </div>
 
             <ng-container *ngIf="ingredientsInput.touched">
@@ -36,10 +39,13 @@
                 <p class="error" *ngIf="ingredientsInput.errors?.['minlength']">
                     Ingredients must be at least 10 characters long!
                 </p>
+                <p class="error" *ngIf="ingredientsInput.errors?.['maxlength']">
+                    Ingredients must be less than 100 characters long!
+                </p>
             </ng-container>
 
             <div class="input-field">
-                <textarea type="text" #descriptionInput="ngModel" ngModel required minlength="20" placeholder="Description" name="description" autocomplete="nope"></textarea>
+                <textarea type="text" #descriptionInput="ngModel" ngModel required minlength="20" maxlength="200" placeholder="Description" name="description" autocomplete="nope"></textarea>
             </div>
 
             <ng-container *ngIf="descriptionInput.touched">
@@ -48,6 +54,9 @@
                 </p>
                 <p class="error" *ngIf="descriptionInput.errors?.['minlength']">
                     Description must be at least 20 characters long!
+                </p>
+                <p class="error" *ngIf="descriptionInput.errors?.['maxlength']">
+                    Description must be less than 200 characters long!
                 </p>
             </ng-container>
         </div>

@@ -5,24 +5,18 @@ footer a:hover {
 
 footer {
     background-color: black;
-    width: 100%;
     display: flex;
     font-size: 1.35rem;
     justify-content: space-around;
     align-items: center;
-    margin-top: 0;
-    margin: 0%;
-    height: 80px;
-}
-
-footer {
-    bottom: 0;
     position: fixed;
-    width: 100%;
+    bottom: 0;
+    right: 0;
+    left: 0;
     color: white;
     text-align: center;
     font-family: 'Barlow', sans-serif;
-    opacity: 0.7;
+    // opacity: 0.7;
     height: 30px;
     font-size: 16px;
     background-color: #000000;

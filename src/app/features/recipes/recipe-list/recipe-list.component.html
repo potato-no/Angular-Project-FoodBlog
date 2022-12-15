@@ -1,9 +1,11 @@
 <section class="post container" *ngFor="let recipe of recipeList; let i = index">
   <div class="post-box">
     <img src="{{recipe.imgUrl}}" class="post-img">
-    <!-- <h2 class="category">the category thing</h2> -->
-    <a href="" class="post-title">{{recipe.recipeName}}</a>
-    <span class="post-date">date 10.12</span>
+    <div class="likes-saves">
+      <p class="likes">Likes: {{recipe.likes.length}}</p>
+      <p class="saves">Saves: {{recipe.saves.length}}</p>
+    </div>
+    <a routerLink="/recipe/detail/{{recipe._id}}" class="post-title">{{recipe.recipeName}}</a>
     <p class="post-description">{{recipe.description}}</p>
     <div class="profile">
       <span class="profile-name">Creator: {{recipe.userId.username}}</span>

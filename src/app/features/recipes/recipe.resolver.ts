@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs";
-import { ApiService } from "src/app/api.service";
 import { IRecipe } from "../../core/interfaces";
+import { RecipeService } from "./recipe.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeResolver implements Resolve<IRecipe | null> {
-  constructor(private apiService: ApiService, private router: Router) { }
+  constructor(private recipeService: RecipeService, private router: Router) { }
   
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): IRecipe | null | Observable<IRecipe> | Promise<IRecipe> {
     const recipeId = route.params['id'];
@@ -16,6 +16,6 @@ export class RecipeResolver implements Resolve<IRecipe | null> {
       this.router.navigate(['/recipe/recent']);
       return null;
     }
-    return this.apiService.loadRecipe(recipeId);
+    return this.recipeService.getRecipe(recipeId);
   }
 }

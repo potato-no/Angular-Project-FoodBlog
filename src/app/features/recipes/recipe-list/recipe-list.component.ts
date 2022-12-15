@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/api.service';
 import { IRecipe } from 'src/app/core/interfaces';
+import { RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -11,11 +11,12 @@ export class RecipeListComponent implements OnInit {
 
   recipeList: IRecipe[] | null = null;
   errorFetchingData = false;
+  
 
-  constructor(private apiService: ApiService) { }
+  constructor(private recipeService: RecipeService) { }
 
   ngOnInit(): void {
-    this.apiService.loadRecipes().subscribe({
+    this.recipeService.getRecipes().subscribe({
       next: (value) => {
         this.recipeList = value;
       },

@@ -11,10 +11,8 @@ import { AuthService } from '../auth.service';
 })
 export class ProfileComponent {
 
-  showEditMode = false;
-  formSubmitted = false;
-
-  counter = 1;
+  showEditMode: boolean = false;
+  formSubmitted: boolean = false;
 
   get user() {
     const { username, email } = this.authService.user!;
@@ -23,10 +21,6 @@ export class ProfileComponent {
       email,
     };
   }
-
-  // get addressesArray() {
-  //   return (this.form.get('addresses') as FormArray);
-  // }
 
   form!: FormGroup;
 
@@ -39,7 +33,6 @@ export class ProfileComponent {
       username: [formValue.username, [Validators.required, Validators.minLength(5)]],
       email: [formValue.email, [Validators.required, appEmailValidator(appEmailDomain)]],
     })
-
   }
 
   toggleEditMode(): void {

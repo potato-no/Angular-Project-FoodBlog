@@ -37,7 +37,7 @@ export class AuthService implements OnDestroy {
       .pipe(tap(user => this.user$$.next(user)));;
   }
 
-  logout() {
+  logout() { 
     return this.http.post<void>('/api/logout', {})
       .pipe(tap(() => this.user$$.next(null)));;
   }
@@ -51,7 +51,7 @@ export class AuthService implements OnDestroy {
           return throwError(() => err);
         })
       );
-  }
+  } 
 
   setProfile(username: string, email: string) {
     return this.http.put<IUser>('/api/users/profile', { username, email })

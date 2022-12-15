@@ -16,7 +16,7 @@
             </ng-container>
 
             <div class="input-field">
-                <input type="username" formControlName="username" placeholder="Username" name="username">
+                <input type="username" formControlName="username" minlength="5" maxlength="15" placeholder="Username" name="username">
             </div>
 
             <ng-container *ngIf="form.get('username')?.touched">
@@ -26,11 +26,14 @@
               <p *ngIf="form.get('username')?.errors?.['minlength']" class="error">
                 Username should be longer than 5 characters!
               </p>
+              <p *ngIf="form.get('username')?.errors?.['maxlength']" class="error">
+                Username should be less than 15 characters!
+              </p>
             </ng-container>
 
             <ng-container formGroupName="pass">
               <div class="input-field">
-                  <input type="password" formControlName="password" placeholder="Password" name="password">
+                  <input type="password" formControlName="password" minlength="5" placeholder="Password" name="password">
               </div>
 
               <ng-container *ngIf="form.get('pass')?.get('password')?.touched">

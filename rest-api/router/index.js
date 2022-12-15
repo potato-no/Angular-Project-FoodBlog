@@ -1,9 +1,8 @@
 const router = require('express').Router();
 const users = require('./users');
 const recipes = require('./recipes');
-const posts = require('./posts');
 const likes = require('./likes');
-const dislikes = require('./dislikes');
+const saves = require('./saves');
 const test = require('./test');
 const { authController } = require('../controllers');
 
@@ -13,9 +12,8 @@ router.post('/logout', authController.logout);
 
 router.use('/users', users);
 router.use('/recipes', recipes);
-router.use('/posts', posts);
 router.use('/likes', likes);
-router.use('/dislikes', dislikes);
+router.use('/saves', saves);
 router.use('/test', test);
 
 module.exports = router;

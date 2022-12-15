@@ -20,15 +20,19 @@ const routes: Routes = [
     } 
   },
   {
+    path: ':id',
+    component: RecipeDetailsComponent,
+  },
+  {
     path: 'detail/:id',
     resolve: {
       recipe: RecipeResolver
     },
     component: RecipeDetailsComponent,
     data: {
-      title: 'Derails',
+      title: 'Details'
     } 
-  }
+  },
 ];
 
 export const RecipeRoutingModule = RouterModule.forChild(routes);

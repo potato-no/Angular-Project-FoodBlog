@@ -77,7 +77,6 @@ Content:
 ``` 
 {
     "recipes": [],
-    "posts": [],
     "_id": "5f1875690916010017964978",
     "name": "John Doe",
     "email": "john@email.com",
@@ -128,7 +127,6 @@ Content:
 ``` 
 {
     "recipes": ["5f85c51996b5601b2406e5b7"],
-    "posts": ["5f86bdcde012743fe4f5b324"],
     "_id": "5f1875690916010017964978",
     "name": "John Doe",
     "email": "john@email.com",
@@ -188,7 +186,6 @@ Content:
 [
     {
         "saves": ["5f8580d25d1da62568dd38fd"],
-        "posts": ["5f858dd2d895ad23602db9d5"],
         "_id": "5f858dd2d895ad23602db9d4",
         "recipeName": "Some Recipe",
         "userId": "5f8580d25d1da62568dd38fd",
