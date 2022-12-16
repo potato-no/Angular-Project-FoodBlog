@@ -5,8 +5,8 @@
     <div class="content">
 
       <div class="flex">
-        <p>Username:</p><p>
-          <ng-container *ngIf="showEditMode">
+        <p class="username">Username:</p><p>
+          <ng-container *ngIf="showEditMode"> 
             <div class="input-field">
               <input type="text" formControlName="username" minlength="5" maxlength="15" placeholder="Username" autocomplete="nope">
             </div>
@@ -30,7 +30,7 @@
       </div>
 
       <div class="flex">
-        <p>Email: </p>
+        <p class="email">Email: </p>
         <p>
           <ng-container *ngIf="showEditMode">
             <div class="input-field">
