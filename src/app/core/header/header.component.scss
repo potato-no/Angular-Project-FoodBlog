@@ -17,7 +17,7 @@ h2 {
     font-size: 1.5rem;
     padding: 0 10px;
     cursor: pointer;
-    text-shadow: 3px 3px rgb(0, 149, 47);
+    text-shadow: 3px 3px rgb(0, 70, 21);
 }
 
 ul li a{
@@ -33,13 +33,17 @@ ul li {
     padding: 0.5rem 1.4rem;
 }
 
+.main {
+    padding-left: 7rem;
+}
+
 ul li::after{
     content: '';
     width: 0%;
     height: 2px;
     background: rgb(30, 107, 23);
     display: block;
-    margin: auto;
+    // margin: auto;
     transition: .4s;
 }
 
@@ -49,4 +53,4 @@ ul li:hover::after{
 
 .auth a {
     cursor: pointer;
-}
+} 

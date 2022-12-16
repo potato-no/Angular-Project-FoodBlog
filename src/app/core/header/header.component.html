@@ -1,9 +1,9 @@
 <div class="header">
-  <h2>Food Blog</h2>
+  <h2 routerLink="/">Food Blog</h2>
 
   <div class="main">
       <ul>
-          <li><a routerLink="/">Home</a></li>
+          <!-- <li><a routerLink="/">Home</a></li> -->
           <li><a routerLink="/recipe/recent">Recipes</a></li>
           <ng-container *ngIf="isLoggedIn">
               <li><a routerLink="/recipe/new">Post Recipe</a></li>
@@ -11,7 +11,7 @@
       </ul>
   </div>
   
-  <div class="auth">
+  <div class="auth"> 
       <ul>
           <ng-container *ngIf="!isLoggedIn">
               <li><a routerLink="/auth/login">Login</a></li>
