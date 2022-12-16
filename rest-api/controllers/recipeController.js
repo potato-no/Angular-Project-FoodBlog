@@ -104,7 +104,6 @@ module.exports = {
     getRecipe,
     saveRecipe,
     like,
-    dislike,
     deleteRecipe,
     editRecipe,
     save
