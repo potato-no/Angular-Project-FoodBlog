@@ -10,16 +10,12 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent {
-
   showEditMode: boolean = false;
   formSubmitted: boolean = false;
 
   get user() {
     const { username, email } = this.authService.user!;
-    return {
-      username,
-      email,
-    };
+    return { username, email };
   }
 
   form!: FormGroup;

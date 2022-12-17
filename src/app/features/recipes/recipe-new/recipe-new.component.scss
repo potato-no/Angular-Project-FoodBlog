@@ -14,6 +14,7 @@
     background: #fff;
     width: 500px;
     margin: 65px auto;
+    margin-top: 150px;
     display: -webkit-box;
     display: flex;
     -webkit-box-orient: vertical;
@@ -61,15 +62,6 @@
     outline: none;
     -webkit-transition: all .2s;
     transition: all .2s;
-  }
-
-  .createNew-form a.link {
-    text-decoration: none;
-    color: #747474;
-    letter-spacing: 0.2px;
-    text-transform: uppercase;
-    display: inline-block;
-    margin-top: 20px;
   }
 
   .createNew-form .action {

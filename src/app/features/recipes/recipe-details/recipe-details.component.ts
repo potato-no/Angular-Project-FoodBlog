@@ -10,6 +10,7 @@ import { RecipeService } from '../recipe.service';
   templateUrl: './recipe-details.component.html',
   styleUrls: ['./recipe-details.component.scss']
 })
+
 export class RecipeDetailsComponent {
   showEditMode: boolean = false;
   formSubmitted: boolean = false;
@@ -18,9 +19,10 @@ export class RecipeDetailsComponent {
   hasSaved: boolean = false;
   hasLiked: boolean = false;
   
+  
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute, private recipeService: RecipeService) {
-    // this.createForm({ ...this.user });
     this.getRecipe()
+    this.hasInteracted()
   }
   
   getRecipe() {
@@ -40,14 +42,26 @@ export class RecipeDetailsComponent {
     })
   }
 
+  hasInteracted() {
+    const userId =  this.authService.user?._id;
+
+    if (this.recipe?.saves.includes(userId!)) { 
+      this.hasSaved = true; 
+    }
+
+    if (this.recipe?.likes.includes(userId!)) { 
+      this.hasLiked = true; 
+    }
+  }
+  
   form!: FormGroup;
 
-  createForm(formValue: any) {
+  createForm(formValue: any) { 
     this.form = this.fb.group({
-      recipeName: [formValue.recipeName, [Validators.required, Validators.minLength(5)]],
+      recipeName: [formValue.recipeName, [Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
       imgUrl: [formValue.imgUrl, [Validators.required]],
-      ingredients: [formValue.ingredients, [Validators.required, Validators.minLength(10), Validators.maxLength(70)]],
-      description: [formValue.description, [Validators.required, Validators.minLength(20), Validators.maxLength(100)]],
+      ingredients: [formValue.ingredients, [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
+      description: [formValue.description, [Validators.required, Validators.minLength(20), Validators.maxLength(400)]],
     })
   }
 
@@ -58,17 +72,18 @@ export class RecipeDetailsComponent {
     }
   }
 
-  updateRecipe() {
+  updateRecipe(): void {
     const recipeId = this.activatedRoute.snapshot.params['id'];
     this.formSubmitted = true;
     if (this.form.invalid) { return; }
     const { recipeName, imgUrl, ingredients, description } = this.form.value;
     this.recipeService.updateRecipe(recipeId, recipeName, imgUrl, ingredients, description).subscribe(() => {
+      this.getRecipe()      
       this.toggleEditMode();
     });
   }
-
-  delete() {
+  
+  delete(): void {
     if (this.authService.user?._id != this.recipe?.userId._id) {
       this.router.navigate(['**']);
     }
@@ -82,19 +97,20 @@ export class RecipeDetailsComponent {
       } 
     })
   }
-
-  save() {
+  
+  save(): void {
     const recipeId = this.activatedRoute.snapshot.params['id'];
     const userId =  this.authService.user?._id;
-
+    
     if (this.recipe?.saves.includes(userId!)) { 
+      this.hasSaved = true; 
       alert('Already saved!')
       return;
     }
     
     this.recipeService.saveRecipe(recipeId, userId!).subscribe({
       next: () => {
-        this.hasSaved = true;
+        this.hasSaved = true; 
       },
       error: (err) => {
         console.log(err);
@@ -102,12 +118,13 @@ export class RecipeDetailsComponent {
     })
   }
 
-  like() {
+  like(): void {
     const recipeId = this.activatedRoute.snapshot.params['id'];
     const userId =  this.authService.user?._id;
 
     if (this.recipe?.likes.includes(userId!)) { 
       alert('Already liked!')
+      this.hasLiked = true;
       return; 
     }
     this.recipeService.likeRecipe(recipeId, userId!).subscribe({

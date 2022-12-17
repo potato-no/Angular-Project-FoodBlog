@@ -1,55 +1,52 @@
 <div class="profile-form">
   <form [formGroup]="form" (ngSubmit)="saveProfile()">
     <h1>Profile info:</h1>
-
     <div class="content">
 
       <div class="flex">
-        <p class="username">Username:</p><p>
-          <ng-container *ngIf="showEditMode"> 
-            <div class="input-field">
-              <input type="text" formControlName="username" minlength="5" maxlength="15" placeholder="Username" autocomplete="nope">
-            </div>
-            <ng-container *ngIf="form.get('username')?.touched || formSubmitted">
-              <p *ngIf="form.get('username')?.errors?.['required']" class="error">
-                Username is required!
-              </p>
-              <p *ngIf="form.get('username')?.errors?.['minlength']" class="error">
-                Username should be longer than 5 characters!
-              </p>
-              <p *ngIf="form.get('username')?.errors?.['maxlength']" class="error">
-                Username should be less than 15 characters!
-              </p>
-            </ng-container>
-          </ng-container>
-
+        <p class="username">Username: 
           <ng-container *ngIf="!showEditMode">
-            {{user.username}}
+          {{user.username}}
+        </ng-container></p>
+        
+        <ng-container *ngIf="showEditMode"> 
+          <div class="input-field">
+            <input type="text" formControlName="username" minlength="5" maxlength="15" placeholder="Username" autocomplete="nope">
+          </div>
+          <ng-container *ngIf="form.get('username')?.touched || formSubmitted"> 
+            <p *ngIf="form.get('username')?.errors?.['required']" class="error">
+              Username is required!
+            </p>
+            <p *ngIf="form.get('username')?.errors?.['minlength']" class="error">
+              Username should be longer than 5 characters!
+            </p>
+            <p *ngIf="form.get('username')?.errors?.['maxlength']" class="error">
+              Username should be less than 15 characters!
+            </p>
           </ng-container>
-        </p>
+        </ng-container>
       </div>
 
       <div class="flex">
-        <p class="email">Email: </p>
-        <p>
-          <ng-container *ngIf="showEditMode">
-            <div class="input-field">
-              <input type="email" formControlName="email" placeholder="Email" autocomplete="nope">
-            </div>
-            <ng-container *ngIf="form.get('email')?.touched || formSubmitted">
-              <p class="error" *ngIf="form.get('email')?.errors?.['required']">
-                Email is required!
-              </p>
-              <p class="error" *ngIf="form.get('email')?.errors?.['appEmailValidator']">
-                Email is not valid!
-              </p>
-            </ng-container>
-          </ng-container>
-
+        <p class="email">Email: 
           <ng-container *ngIf="!showEditMode">
             {{user.email}}
           </ng-container>
         </p>
+        
+        <ng-container *ngIf="showEditMode">
+          <div class="input-field">
+            <input type="email" formControlName="email" placeholder="Email" autocomplete="nope">
+          </div>
+          <ng-container *ngIf="form.get('email')?.touched || formSubmitted">
+            <p class="error" *ngIf="form.get('email')?.errors?.['required']">
+              Email is required!
+            </p>
+            <p class="error" *ngIf="form.get('email')?.errors?.['appEmailValidator']">
+              Email is not valid!
+            </p>
+          </ng-container>
+        </ng-container>
       </div> 
     </div>
 

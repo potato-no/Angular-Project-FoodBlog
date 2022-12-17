@@ -14,6 +14,8 @@ body {
   background: #fff;
   width: 500px;
   margin: 65px auto;
+  margin-top: 150px;
+
   display: -webkit-box;
   display: flex;
   -webkit-box-orient: vertical;
@@ -115,10 +117,23 @@ body {
 .profile-form .action button:nth-child(2) {
   background: #2d3b55;
   color: #fff;
-  border-bottom-left-radius: 0;
+  border-bottom-left-radius: 0; 
   border-bottom-right-radius: 4px;
 }
 
 .profile-form .action button:nth-child(2):hover {
   background: #3c4d6d;
 } 
+
+.username {
+  font-size: 20px;
+}
+
+.email {
+  font-size: 20px;
+  margin-top: 15px;
+}
+
+.flex {
+  text-align: left;
+}

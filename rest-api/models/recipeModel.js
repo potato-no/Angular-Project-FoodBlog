@@ -13,13 +13,13 @@ const recipeSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: [20, 'Description should be at least 20 characters!'],
-        maxlength: [200, 'Description should be less than 200 characters!']
+        maxlength: [400, 'Description should be less than 400 characters!']
     },
     ingredients: {
         type: String,
         required: true,
         minlength: [10, 'Ingredients should be at least 10 characters!'],
-        maxlength: [100, 'Ingredients should be less than 100 characters!']
+        maxlength: [200, 'Ingredients should be less than 200 characters!']
     },
     imgUrl: {
         type: String, 
